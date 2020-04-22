@@ -9,7 +9,7 @@ OBJS=$(SRCS:.s=.o)
 RM=rm -f
 	
 %.o: %.s
-	~/.brew/bin/nasm -f macho64 $^
+	nasm -f macho64 $^
 
 all:		$(NAME)
 

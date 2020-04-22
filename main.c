@@ -6,11 +6,12 @@
 /*   By: gbaud <gbaud@student.le-101.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 05:01:40 by gbaud             #+#    #+#             */
-/*   Updated: 2020/03/07 13:14:07 by gbaud            ###   ########lyon.fr   */
+/*   Updated: 2020/04/22 12:50:05 by gbaud            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
@@ -46,20 +47,20 @@ int main()
 	
 	// STRCMP =================
 	printf("\nSTRCMP TEST 1 :\n\n");
-	printf(">   strcmp ret: %d\n", strcmp("abc", "bcd"), str);
-	printf(">ft_strcmp ret: %d\n", ft_strcmp("abc", "bcd"), ft_str);
+	printf(">   strcmp ret: %d\n", strcmp("abc", "bcd"));
+	printf(">ft_strcmp ret: %d\n", ft_strcmp("abc", "bcd"));
 	
 	printf("\nSTRCMP TEST 2 :\n\n");
-	printf(">   strcmp ret: %d\n", strcmp("abc", "abc"), str);
-	printf(">ft_strcmp ret: %d\n", ft_strcmp("abc", "abc"), ft_str);
+	printf(">   strcmp ret: %d\n", strcmp("abc", "abc"));
+	printf(">ft_strcmp ret: %d\n", ft_strcmp("abc", "abc"));
 	
 	printf("\nSTRCMP TEST 3 :\n\n");
-	printf(">   strcmp ret: %d\n", strcmp("bcd", "abc"), str);
-	printf(">ft_strcmp ret: %d\n", ft_strcmp("bcd", "abc"), ft_str);
+	printf(">   strcmp ret: %d\n", strcmp("bcd", "abc"));
+	printf(">ft_strcmp ret: %d\n", ft_strcmp("bcd", "abc"));
 	
 	printf("\nSTRCMP TEST 4 :\n\n");
-	printf(">   strcmp ret: %d\n", strcmp("", ""), str);
-	printf(">ft_strcmp ret: %d\n", ft_strcmp("", ""), ft_str);
+	printf(">   strcmp ret: %d\n", strcmp("", ""));
+	printf(">ft_strcmp ret: %d\n", ft_strcmp("", ""));
 	
 	// WRITE =================
 	printf("\nWRITE TEST 1 :\n\n");
