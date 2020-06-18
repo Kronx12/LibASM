@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    ft_write.s                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbaud <gbaud@student.le-101.fr>            +#+  +:+       +#+         #
+#    By: gbaud <gbaud@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 13:14:33 by gbaud             #+#    #+#              #
-#    Updated: 2020/03/07 13:17:05 by gbaud            ###   ########lyon.fr    #
+#    Updated: 2020/06/18 18:43:30 by gbaud            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 section .text
 	global _ft_write
-	extern ___error
+	extern __errno_location
 
 _ft_write:
 	push rbp
@@ -21,7 +21,7 @@ _ft_write:
 	syscall
 	jnc end
 	mov r10, rax
-	call ___error
+	call __errno_location
 	mov [rax], r10
 	mov rax, -1
 

@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbaud <gbaud@student.le-101.fr>            +#+  +:+       +#+        */
+/*   By: gbaud <gbaud@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 05:01:40 by gbaud             #+#    #+#             */
-/*   Updated: 2020/04/22 12:50:05 by gbaud            ###   ########lyon.fr   */
+/*   Updated: 2020/06/18 19:17:30 by gbaud            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <string.h>
-#include <unistd.h>
-#include "libasm.h"
+#include "./includes/libasm.h"
 
 int main()
 {
