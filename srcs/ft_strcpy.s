@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    ft_strcpy.s                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbaud <gbaud@student.le-101.fr>            +#+  +:+       +#+         #
+#    By: gbaud <gbaud@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 13:15:02 by gbaud             #+#    #+#              #
-#    Updated: 2020/03/07 13:16:26 by gbaud            ###   ########lyon.fr    #
+#    Updated: 2020/06/20 17:00:22 by gbaud            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 section .text
-	global _ft_strcpy
+global ft_strcpy
 
 _inc_val:
 	mov r9b, [rsi]
@@ -20,7 +20,7 @@ _inc_val:
 	inc r8
 	jmp _loop
 
-_ft_strcpy:
+ft_strcpy:
 	push rbp
 	push r8
 	push r9

@@ -1,30 +1,39 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_read.s                                          :+:      :+:    :+:    #
+#    ft_strdup.s                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: gbaud <gbaud@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/07 13:15:17 by gbaud             #+#    #+#              #
-#    Updated: 2020/06/18 18:43:24 by gbaud            ###   ########.fr        #
+#    Created: 2020/03/07 13:16:35 by gbaud             #+#    #+#              #
+#    Updated: 2020/06/20 17:51:26 by gbaud            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-section .text
-	global _ft_read
-	extern __errno_location
+section .data
+global ft_strdup
+tab dd 0
 
-_ft_read:
-	push rbp
-	push r10
-	mov rax, 0x02000003
-	syscall
-	jnc end
-	mov r10, rax
-	call __errno_location
-	mov [rax], r10
-	mov rax, -1
-end:
-	pop r10
-	pop rbp
+section .text
+	global ft_strdup
+	extern ft_strlen
+	extern ft_strcpy
+	extern malloc
+
+ft_strdup:
+	push rdi
+	call ft_strlen
+	inc rax
+	mov rdi, rax
+	call malloc
+	cmp rax, 0
+	je _end
+
+	pop rsi
+	mov rdi, rax
+	call ft_strcpy
+	ret
+
+_end:
+	pop rdi
 	ret

@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    ft_strcmp.s                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbaud <gbaud@student.le-101.fr>            +#+  +:+       +#+         #
+#    By: gbaud <gbaud@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 13:15:26 by gbaud             #+#    #+#              #
-#    Updated: 2020/03/07 13:15:59 by gbaud            ###   ########lyon.fr    #
+#    Updated: 2020/06/20 17:00:26 by gbaud            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 section .text
-	global _ft_strcmp
+global ft_strcmp
 
-_ft_strcmp:
+ft_strcmp:
 	push rbp
 	push r11
 	push r10

@@ -1,38 +1,30 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_strdup.s                                        :+:      :+:    :+:    #
+#    ft_strlen.s                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbaud <gbaud@student.le-101.fr>            +#+  +:+       +#+         #
+#    By: gbaud <gbaud@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/07 13:16:35 by gbaud             #+#    #+#              #
-#    Updated: 2020/03/07 13:16:35 by gbaud            ###   ########lyon.fr    #
+#    Created: 2020/03/07 13:16:58 by gbaud             #+#    #+#              #
+#    Updated: 2020/06/20 17:00:37 by gbaud            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-section .data
-	tab dd 0
-
 section .text
-	global _ft_strdup
-	extern _ft_strlen
-	extern _ft_strcpy
-	extern _malloc
+global ft_strlen
 
-_ft_strdup:
-	push rdi
-	call _ft_strlen
+_inc_val:
 	inc rax
-	mov rdi, rax
-	call _malloc
-	cmp rax, 0
-	je _end
+	inc rdi
+	jmp _loop
 
-	pop rsi
-	mov rdi, rax
-	call _ft_strcpy
-	ret
+ft_strlen:
+	push rbp
+	mov rax, 0
+	jmp _loop
 
-_end:
-	pop rdi
+_loop:
+	cmp byte [rdi], 0
+	jne _inc_val
+	pop rbp
 	ret

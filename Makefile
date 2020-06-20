@@ -1,56 +1,61 @@
+# Name of file
+NAME        =    libasm.a
 
-NAME	= libasm.a
+# Name directory
+PATH_INC    =    includes
+PATH_SRC    =    srcs
+PATH_OBJ    =    objs
+PATH_LOG    =    logs
 
-SRC		= 	ft_strlen.s \
-			ft_strcpy.s \
-			ft_strcmp.s \
-			ft_write.s	\
-			ft_read.s	\
-			ft_strdup.s
+# List of sources
+SRCS        =    $(wildcard $(PATH_SRC)/*.s)
+OBJS        =    $(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.s=.o)))
+INCS        =    $(wildcard $(PATH_INC)/*.h)
+LOG         =    $(addprefix $(PATH_LOG)/, $(patsubst %.a.log,%.log,$(NAME).log))
 
-NASM	= nasm
+# Commands of compilation
+COMP        =    nasm
+COMP_FLAG   =    -f elf64
+COMP_ADD    =    -I$(PATH_INC)
 
-SRCDIR	= ./src/
+# Others Command
+RM          =    /bin/rm
 
-INCDIR	= ./includes/
+# Color Code and template code
+_YELLOW     =    \e[38;5;184m
+_GREEN      =    \e[38;5;46m
+_RESET      =    \e[0m
+_INFO       =    [$(_YELLOW)INFO$(_RESET)]
+_SUCCESS    =    [$(_GREEN)SUCCESS$(_RESET)]
 
-CC_FLAG = -Wall -Werror -Wextra
+# Functions
+all:				init $(NAME)
+	@ echo "$(_SUCCESS) Compilation done in $$(($$(date +%S)-$$(cat logs/time.log)))s"
+	@ $(RM) -rf $(PATH_LOG)/time.log
 
-MAIN	= main_test
+init:
+	@ date +%S > $(addprefix $(PATH_LOG)/, time.log)
+	@ $(shell mkdir -p $(PATH_OBJ) $(PATH_LOG))
 
-FLAG	= -f elf64
+$(NAME):			$(OBJS) $(INCS)
+	@ (set -x; ar rcs $(NAME) $(OBJS)) >> $(LOG) 2>&1
 
-SRCS	= $(addprefix $(SRCDIR), $(SRC))
-
-OBJS	= $(SRCS:.s=.o)
-
-.SILENT:
-
-all: $(NAME)
-
-$(NAME) : $(OBJS)
-	echo "Compiling $(NAME)..."
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
-	echo "DONE"
-
-%.o: %.s $(INCDIR)libasm.h
-	$(NASM) $(FLAG) $<
+$(PATH_OBJ)/%.o :	$(PATH_SRC)/%.s $(INCS)
+	@ (set -x; $(COMP) $(COMP_FLAG) $(COMP_ADD) $< -o $@) >> $(LOG) 2>&1
+	@ echo "$(_INFO) Compilation of $*"
 
 clean:
-	rm -rf $(OBJS)
-	echo "Object files has been removed!"
+	@ $(RM) -rf $(PATH_OBJ)
+	@ echo "$(_INFO) Deleted files and directory"
 
-fclean: clean
-	rm -rf $(NAME)
-	rm -rf main_test
-	echo "$(NAME) has been removed!"
+fclean:				clean
+	@ $(RM) -rf $(NAME)
+	@ $(RM) -rf $(PATH_LOG)
+	@ $(RM) -rf libasm
 
-re: fclean all
+re:					fclean all
 
-test: all
-	gcc $(CC_FLAG) -I$(INCDIR) -o $(MAIN) -L. -lasm main.c
-	echo "$(MAIN) has been created!"
-	./$(MAIN) test
+run:				$(NAME)
+	@ (set -x; gcc -Wall -Werror -Wextra -no-pie $(COMP_ADD) -o libasm main.c -L. -lasm) >> $(LOG) 2>&1
 
-.PHONY: all bonus clean fclean re test
+.PHONY: all clean fclean re run init
