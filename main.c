@@ -6,11 +6,11 @@
 /*   By: gbaud <gbaud@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 05:01:40 by gbaud             #+#    #+#             */
-/*   Updated: 2020/06/18 19:17:30 by gbaud            ###   ########.fr       */
+/*   Updated: 2020/06/20 16:04:55 by gbaud            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libasm.h"
+#include "libasm.h"
 
 int main()
 {

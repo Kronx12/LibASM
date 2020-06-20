@@ -1,34 +1,56 @@
-CC=clang
-FLAGS= -Wall -Wextra -Werror
-NAME=libasm.a
-SRCS=src/ft_strlen.s \
-	 src/ft_strcpy.s \
-	 src/ft_strcmp.s \
-	 src/ft_write.s \
-	 src/ft_read.s \
-	 src/ft_strdup.s
-OBJS=$(SRCS:.s=.o)
-RM=rm -f
-	
-%.o: %.s
-	nasm -f elf64 $< -o $@
 
-all:		$(NAME)
+NAME	= libasm.a
 
-$(OBJS):	$(INC)
+SRC		= 	ft_strlen.s \
+			ft_strcpy.s \
+			ft_strcmp.s \
+			ft_write.s	\
+			ft_read.s	\
+			ft_strdup.s
 
-$(NAME): 	$(INC) $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+NASM	= nasm
 
-test:		all
-	$(CC) $(FLAGS) -I./includes/libasm.h libasm.a main.c -o tester
+SRCDIR	= ./src/
+
+INCDIR	= ./includes/
+
+CC_FLAG = -Wall -Werror -Wextra
+
+MAIN	= main_test
+
+FLAG	= -f elf64
+
+SRCS	= $(addprefix $(SRCDIR), $(SRC))
+
+OBJS	= $(SRCS:.s=.o)
+
+.SILENT:
+
+all: $(NAME)
+
+$(NAME) : $(OBJS)
+	echo "Compiling $(NAME)..."
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
+	echo "DONE"
+
+%.o: %.s $(INCDIR)libasm.h
+	$(NASM) $(FLAG) $<
 
 clean:
-	$(RM) $(OBJS) $(BNS)
+	rm -rf $(OBJS)
+	echo "Object files has been removed!"
 
-fclean: 	clean
-	$(RM) $(NAME)
+fclean: clean
+	rm -rf $(NAME)
+	rm -rf main_test
+	echo "$(NAME) has been removed!"
 
-re:		fclean all
+re: fclean all
+
+test: all
+	gcc $(CC_FLAG) -I$(INCDIR) -o $(MAIN) -L. -lasm main.c
+	echo "$(MAIN) has been created!"
+	./$(MAIN) test
 
 .PHONY: all bonus clean fclean re test
